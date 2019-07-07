@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  title="e-shop";
+  
   constructor() { }
 
   ngOnInit() {

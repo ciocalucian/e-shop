@@ -1,0 +1,14 @@
+#header {
+    width: 80%;
+    border: 1px solid black;
+    margin: auto;
+    display: flex;
+}
+
+#title {
+    width: 50%;
+}
+
+#headerButtons {
+    width: 50%;
+}
