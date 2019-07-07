@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component';
 import { CartComponent } from './cart/cart.component';
 import { ModalModule } from 'ngb-modal';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MainPageComponent,
     AdminComponent,
     DetailsComponent,
-    CartComponent
+    CartComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

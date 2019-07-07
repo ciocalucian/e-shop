@@ -15,29 +15,29 @@ export class AdminComponent implements OnInit {
 
   public nume = '';
   public details = '';
-  public pret = 0;
-  public cantitate = 0;
+  public pret = '';
+  public cantitate = '';
+
+  constructor() {
+
+  }
+
+  ngOnInit() {
+  
+  } 
 
   addItem() {
     const item = {
       nume: this.nume,
       details: this.details,
       pret: this.pret,
-      cantitate= this.cantitate
-    };
-    
+      cantitate: this.cantitate
+    }
     this.list.push(item);
     this.nume = '';
     this.details = '';
-    this.pret = 0;
-    this.cantitate = 0;
+    this.pret = '';
+    this.cantitate = '';
+    console.log(this.list);
   }
-  
-
-  
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }
