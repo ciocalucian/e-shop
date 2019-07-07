@@ -10,3 +10,33 @@
             aria-controls="nav-contact" aria-selected="false">Admin</a>
     </div>
 </nav>
+
+<div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Adauga Produs</span>
+    </div>
+    <input type="text" aria-label="nume" [(ngModel)]="nume" class="form-control" placeholder="nume">
+    <input type="text" aria-label="nume" [(ngModel)]="details" class="form-control" placeholder="details">
+    <input type="number" aria-label="nume" [(ngModel)]="pret" class="form-control" placeholder="task">
+    <input type="number" aria-label="score" [(ngModel)]="cantitate" class="form-control">
+    <button class="btn btn-primary" (click)="addItem()">Add</button>
+  </div>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Score</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of list; let i = index" [ngClass]="{'finished': task.finished}">
+        <td>{{task.nume}}</td>
+        <td>{{task.details}}</td>
+        <td>{{task.pret}}</td>
+        <td>{{task.cantitate}}</td>
+      </tr>
+    </tbody>
+  </table>
