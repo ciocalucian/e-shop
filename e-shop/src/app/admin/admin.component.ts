@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ThrowStmt } from '@angular/compiler';
+import { ProductsService } from '../shared/products.service';
 
 @Component({
   selector: 'app-admin',
@@ -11,33 +10,31 @@ export class AdminComponent implements OnInit {
 
   title = "e-shop";
 
-  public list = [];
+  constructor(private productsService: ProductsService) { }
+  
+  showSuccessMessage: boolean;
+  formControls = this.productsService.form.controls;
 
-  public nume = '';
-  public details = '';
-  public pret = '';
-  public cantitate = '';
-
-  constructor() {
-
-  }
 
   ngOnInit() {
-  
   } 
 
-  addItem() {
-    const item = {
-      nume: this.nume,
-      details: this.details,
-      pret: this.pret,
-      cantitate: this.cantitate
+  onSubmit() {
+    if (this.productsService.form.valid) {
+      if (this.productsService.form.get('$key').value == null)
+        this.productsService.insertProduct(this.productsService.form.value);
+      this.showSuccessMessage = true;
+      setTimeout(() => this.showSuccessMessage = false, 3000);
+      this.productsService.form.reset();
+      //this is to be done for proper reset operation
+      this.productsService.form.setValue({
+        $key: null,
+        name: '',
+        details: '',
+        pret: '',
+        cantitate: ''
+      });
     }
-    this.list.push(item);
-    this.nume = '';
-    this.details = '';
-    this.pret = '';
-    this.cantitate = '';
-    console.log(this.list);
   }
+
 }

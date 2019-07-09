@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MainPageComponent } from './main-page/main-page.component';
-
 
 @Component({
   selector: 'app-root',
@@ -9,4 +7,5 @@ import { MainPageComponent } from './main-page/main-page.component';
 })
 export class AppComponent {
   title = 'e-shop';
+
 }
