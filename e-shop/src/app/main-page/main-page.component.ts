@@ -11,7 +11,7 @@ export class MainPageComponent implements OnInit {
 
   title="e-shop";
   
-  constructor(private productsService: ProductsService,private router: Router) { }
+  constructor(private productsService: ProductsService) { }
 
   productsArray = [];  
 
