@@ -9,7 +9,6 @@ export class ProductsService {
 
   constructor(private firebase: AngularFireDatabase) { }
   productsList: AngularFireList<any>;
-
   form = new FormGroup({
     $key: new FormControl(null),
     name: new FormControl('', Validators.required),
@@ -46,4 +45,7 @@ export class ProductsService {
       });
   }
 
+  deleteProduct($key: string){
+    this.productsList.remove($key);
+  }
 }
