@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-
 
 @Injectable({
   providedIn: 'root'
@@ -9,38 +8,28 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class ProductsService {
 
   constructor(private firebase: AngularFireDatabase) { }
-  productsLits: AngularFireList<any>;
+  productsList: AngularFireList<any>;
 
   form = new FormGroup({
     $key: new FormControl(null),
-    name: new FormControl(''),
+    name: new FormControl('', Validators.required),
     details: new FormControl(''),
     pret: new FormControl(''),
     cantitate: new FormControl('')
   });
-
-  getProducts() {
-    this.productsLits = this.firebase.list('produse');
-    return this.productsLits;
+ 
+  getProducts(){
+    this.productsList = this.firebase.list('produse');
+    return this.productsList.snapshotChanges();
   }
-
-  getUsers(){
-    return this.db.collection('produse').snapshotChanges();
-  }
-
-
-  insertProduct(produs) {
-    if(!this.productsLits){
-      this.productsLits = this.getProducts();
-    }
-    this.productsLits.push({
-      name: produs.name,
-      details: produs.details,
-      pret: produs.pret,
-      cantitate: produs.cantitate
+  insertProduct(product){
+    this.productsList.push({
+      name: product.name,
+      details: product.details,
+      pret: product.pret,
+      cantitate: product.cantitate
     });
+
   }
-
   
-
 }
