@@ -29,6 +29,13 @@ export class AdminComponent implements OnInit {
         setTimeout(() => this.showSuccessMessage = false, 3000);
       this.submitted = false;
       this.productsService.form.reset();
+      this.productsService.form.setValue({
+        $key: null,
+        name: '',
+        details: '',
+        pret: '',
+        cantitate: ''
+      });
     }
   }
 }

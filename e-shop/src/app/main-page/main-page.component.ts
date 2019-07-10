@@ -10,12 +10,21 @@ import { ProductsService } from '../shared/products.service';
 export class MainPageComponent implements OnInit {
 
   title="e-shop";
+  productsArray = [];
   
   constructor(private productsService: ProductsService) { }
 
   
-   ngOnInit() {
-     this.productsService.getProducts(); 
+  ngOnInit() {
+     this.productsService.getProducts().subscribe(
+       list => {
+         this.productsArray = list.map(item => {
+           return {
+             $key: item.key,
+             ...item.payload.val()
+           };
+         });
+       }); 
   }
   
 

@@ -32,4 +32,9 @@ export class ProductsService {
 
   }
   
+  populateForm(product){
+    this.form.setValue(product);
+
+  }
+
 }
