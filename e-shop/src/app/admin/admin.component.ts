@@ -25,6 +25,8 @@ export class AdminComponent implements OnInit {
     if (this.productsService.form.valid){
        if (this.productsService.form.get('$key').value == null)
         this.productsService.insertProduct(this.productsService.form.value);
+        else
+        this.productsService.updateProduct(this.productsService.form.value);
         this.showSuccessMessage = true;
         setTimeout(() => this.showSuccessMessage = false, 3000);
       this.submitted = false;

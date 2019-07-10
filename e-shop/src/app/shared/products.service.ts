@@ -34,7 +34,16 @@ export class ProductsService {
   
   populateForm(product){
     this.form.setValue(product);
+  }
 
+  updateProduct(product){
+    this.productsList.update(product.$key,
+      { 
+        name: product.name,
+        details: product.details,
+        pret: product.pret,
+        cantitate: product.cantitate
+      });
   }
 
 }
