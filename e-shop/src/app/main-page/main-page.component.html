@@ -1,17 +1,23 @@
-<table class="table table-dark">
-    <thead>
-        <th>Nume</th>
-        <th>Details</th>
-        <th>Pret</th>
-        <th>Cantitate</th>
-        <th></th>
-    </thead>
-    <ng-container *ngFor="let produs of productsArray">
-        <tr class="table table-dark" >
-            <td>{{produs.name}}</td>
-            <td>{{produs.details}}</td>
-            <td>{{produs.pret}}$</td>
-            <td>{{produs.cantitate}}buc.</td>
-        </tr>
-    </ng-container>
-    </table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-6" *ngFor="let produs of productsArray">
+            <div class="product-grid6">
+                <div class="product-image6">
+                    <a href="#">
+                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo10/images/img-1.jpg">
+                    </a>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">{{produs.name}}</a></h3>
+                    <div class="price">
+                        ${{produs.pret}}
+                    </div>
+                </div>
+                <ul class="social">
+                    <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
