@@ -1,51 +1,35 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  constructor(private firebase: AngularFireDatabase) { }
-  productsList: AngularFireList<any>;
-  form = new FormGroup({
-    $key: new FormControl(null),
-    name: new FormControl('', Validators.required),
-    details: new FormControl(''),
-    pret: new FormControl(''),
-    cantitate: new FormControl('')
-  });
- 
-  getProducts(){
-    this.productsList = this.firebase.list('produse');
-    return this.productsList.snapshotChanges();
-  }
-  insertProduct(product){
-    this.productsList.push({
-      name: product.name,
-      details: product.details,
-      pret: product.pret,
-      cantitate: product.cantitate
-    });
+  constructor(private http: HttpClient) { }
+  backendApiUrl = 'https://e-shop-e.firebaseio.com';
 
-  }
-  
-  populateForm(product){
-    this.form.setValue(product);
+  getProducts() {
+    return this.http.get(`${this.backendApiUrl}/produse.json`);
   }
 
-  updateProduct(product){
-    this.productsList.update(product.$key,
-      { 
-        name: product.name,
-        details: product.details,
-        pret: product.pret,
-        cantitate: product.cantitate
-      });
+  deleteProduct(key) {
+    // console.log("product in delete function", key);
+    return this.http.delete(`${this.backendApiUrl}/produse/${key}.json`);
   }
 
-  deleteProduct($key: string){
-    this.productsList.remove($key);
+  updateProduct(product, key) {
+    // console.log('product in edit function', product, key);
+    return this.http.put(`${this.backendApiUrl}/produse/${key}.json`, product)
+  } 
+
+  createProduct(product) {
+    return this.http.post(`${this.backendApiUrl}/produse.json`, product);
   }
+
+
+  editProduct(product, key){
+    return this.http.get(`${this.backendApiUrl}/produse/${key}.json`, product)
+  }
+
 }

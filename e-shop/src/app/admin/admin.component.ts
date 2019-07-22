@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../shared/products.service'
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,51 +10,67 @@ import { ProductsService } from '../shared/products.service'
 export class AdminComponent implements OnInit {
 
   title = "e-shop";
-  productsArray = [];
-  constructor(public productsService: ProductsService) { }
-  submitted: boolean;
-  showSuccessMessage: boolean;
-  showDeletedMessage: boolean;
-  formControls = this.productsService.form.controls;
+  products = {};
+  keys = [];
+  productForm; 
+  constructor(public productsService: ProductsService, private formBuilder: FormBuilder) { }
+ 
   ngOnInit() {
-    this.productsService.getProducts().subscribe(
-      list => {
-        this.productsArray = list.map(item => {
-          return {
-            $key: item.key,
-            ...item.payload.val()
-          };
-        });
-      }); 
+    this.productsService.getProducts().subscribe(prodResponse => {
+      this.products = prodResponse;
+      this.keys = Object.keys(prodResponse);
+      // console.log('produse', products);
+      // Object.keys(products).forEach(key =>  {
+      //   console.log(products[key]);
+      // })
+    });
+
+    this.productForm = this.formBuilder.group({
+      cantitate: '',
+      details: '',
+      imageUrl: '',
+      pret: '',
+      name: ''
+    });
+
+
  }
 
-  onSubmit(){
-    this.submitted = true;
-    if (this.productsService.form.valid){
-       if (this.productsService.form.get('$key').value == null)
-        this.productsService.insertProduct(this.productsService.form.value);
-        else
-        this.productsService.updateProduct(this.productsService.form.value);
-        this.showSuccessMessage = true;
-        setTimeout(() => this.showSuccessMessage = false, 3000);
-      this.submitted = false;
-      this.productsService.form.reset();
-      this.productsService.form.setValue({
-        $key: null,
-        name: '',
-        details: '',
-        pret: '',
-        cantitate: ''
-      });
-    }
-  }
+ onDelete(key) {
+ 
 
-  onDelete($key){
-    if (confirm('Are u sure to delete this product?')){
-      this.productsService.deleteProduct($key);
-      this.showDeletedMessage = true;
-      setTimeout(() => this.showDeletedMessage = false, 3000)
+  /// array -> map, filter, forEach -> es6 array functions
+  this.productsService.deleteProduct(key).subscribe(resp => {
+    console.log("raspuns stergere produs", resp); 
+    this.keys = this.keys.filter(existingKey => existingKey !== key);
+  }); 
+ }
+ 
+ 
+
+  onSubmit() {
+
+    const newProduct = {
+      cantitate: parseInt(this.productForm.value.cantitate, 10),
+      name: this.productForm.value.name,
+      imageUrl: this.productForm.value.imageUrl,
+      details: this.productForm.value.details,
+      pret: parseInt(this.productForm.value.pret, 10),
     }
+    this.productsService.createProduct(newProduct).subscribe(resp => {
+      this.products[resp['name']] = newProduct;
+      this.keys.push(resp['name']);
+      console.log("response from create product", resp, this.products); 
+    });
+    console.log("submit product", newProduct, this.productForm.value);
+  }
+    
+  onEdit(product, key) {
+    this.productsService.editProduct(product, key).subscribe(resp => {
+      console.log("PUT call successful value returned in body",resp, key);
+      this.productForm = this.formBuilder.group(resp);
+    })
+
   }
 
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,9 +15,6 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ModalModule } from 'ngb-modal';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from '../environments/environment';
 import { ProductsService } from './shared/products.service';
 
 @NgModule({
@@ -30,13 +28,12 @@ import { ProductsService } from './shared/products.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ModalModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent],
