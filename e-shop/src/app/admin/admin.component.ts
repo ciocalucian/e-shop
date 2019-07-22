@@ -19,10 +19,6 @@ export class AdminComponent implements OnInit {
     this.productsService.getProducts().subscribe(prodResponse => {
       this.products = prodResponse;
       this.keys = Object.keys(prodResponse);
-      // console.log('produse', products);
-      // Object.keys(products).forEach(key =>  {
-      //   console.log(products[key]);
-      // })
     });
 
     this.productForm = this.formBuilder.group({

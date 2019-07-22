@@ -10,13 +10,22 @@ import { ProductsService } from '../shared/products.service';
 export class MainPageComponent implements OnInit {
 
   title="e-shop";
+  products = {};
+  keys = [];
   
   constructor(private productsService: ProductsService) { }
 
   
   ngOnInit() {
-     
+    this.productsService.getProducts().subscribe(prodResponse => {
+      this.products = prodResponse;
+      this.keys = Object.keys(prodResponse);
+    });
+
   }
-  
+
+  addToCart(key){
+    localStorage.setItem('${key}', JSON.stringify(key));
+  }
 
 }
