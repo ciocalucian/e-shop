@@ -19,17 +19,16 @@ export class ProductsService {
   }
 
   updateProduct(product, key) {
-    // console.log('product in edit function', product, key);
-    return this.http.put(`${this.backendApiUrl}/produse/${key}.json`, product)
+    //console.log('product in edit function', product, key);
+    return this.http.put(`${this.backendApiUrl}/produse/${key}.json`, product);
   } 
-
   createProduct(product) {
     return this.http.post(`${this.backendApiUrl}/produse.json`, product);
   }
 
 
-  editProduct(product, key){
-    return this.http.get(`${this.backendApiUrl}/produse/${key}.json`, product)
+  getProduct(product, key){
+    return this.http.get(`${this.backendApiUrl}/produse/${key}.json`,product)
   }
 
 }

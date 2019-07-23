@@ -12,7 +12,7 @@ export class MainPageComponent implements OnInit {
   title="e-shop";
   products = {};
   keys = [];
-  cartItems = [];
+  cartStorage = [];
   
   constructor(private productsService: ProductsService) { }
 
@@ -26,8 +26,9 @@ export class MainPageComponent implements OnInit {
   }
 
   addToCart(key){
-    this.cartItems.push(key);
-    localStorage.setItem('produse', JSON.stringify(this.cartItems));
+    this.cartStorage.push(key);
+    localStorage.setItem('produse', JSON.stringify(this.cartStorage));
+    console.log("produs adaugat in cosul de cumparaturi",this.cartStorage)
   }
 
 }
