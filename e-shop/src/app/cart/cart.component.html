@@ -12,10 +12,10 @@
     </thead>
     <ng-container *ngFor="let key of keys">
         <tr class="table" >
-            <td>{{products[key].name}}</td>
-            <td>{{products[key].details}}</td>
-            <td>{{products[key].pret}}$</td>
-            <td>{{products[key].cantitate}} buc.</td>
+            <td>{{key[products].name}}</td>
+            <td>{{key[products].details}}</td>
+            <td>{{key[products].pret}}$</td>
+            <td>{{key[products].cantitate}} buc.</td>
             <td>
                 <button class="btn btn-outline-danger" >Delete</button>
             </td>

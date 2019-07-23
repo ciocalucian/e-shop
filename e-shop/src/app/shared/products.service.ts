@@ -30,5 +30,8 @@ export class ProductsService {
   getProduct(product, key){
     return this.http.get(`${this.backendApiUrl}/produse/${key}.json`,product)
   }
+  getProductI(key){
+    return this.http.get(`${this.backendApiUrl}/produse/${key}.json`)
+  }
 
 }

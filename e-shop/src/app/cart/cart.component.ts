@@ -10,31 +10,25 @@ import { FormBuilder } from '@angular/forms';
 export class CartComponent implements OnInit {
 
   title="e-shop";
-  cartItems = [];
   products = {};
   keys = [];
   productForm;
 
-  constructor(public productsService: ProductsService,private formBuilder: FormBuilder) { }
+  constructor(public productsService: ProductsService) { }
 
   ngOnInit() {
-    this.productForm = this.formBuilder.group({
-      cantitate: '',
-      details: '',
-      imageUrl: '',
-      pret: '',
-      name: ''
-    });
     const storedProducts = JSON.parse(localStorage.getItem('produse'));
-    this.cartItems = storedProducts ? storedProducts: [];
-    console.log(this.cartItems);
-  
-    for ( let item of this.cartItems) {
-      this.productsService.getProduct(product, item).subscribe( itemCart => { 
-        this.products = itemCart;
-        this.keys = Object.keys(itemCart);
-        console.log(this.products);
-      });
+    this.keys = storedProducts ? storedProducts: [];
+    console.log(this.keys);
+    console.log(this.products);
+    
+    for(let key of this.keys){
+      this.productsService.getProductI(key).subscribe( resp => {
+        this.products += resp;
+        console.log(resp,this.products)
+      }
+
+      )
     }
   }
 
