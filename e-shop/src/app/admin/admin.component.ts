@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../shared/products.service'
 import { FormBuilder } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditProductModalComponent } from './edit-product-modal/edit-product-modal.component';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +21,8 @@ export class AdminComponent implements OnInit {
   showSuccessMessage: boolean;
 
   
-  constructor(public productsService: ProductsService, private formBuilder: FormBuilder) { }
+  constructor(public productsService: ProductsService, private formBuilder: FormBuilder,
+    private modalService: NgbModal) { }
   
   ngOnInit() {
     this.productsService.getProducts().subscribe(prodResponse => {
@@ -69,35 +72,48 @@ export class AdminComponent implements OnInit {
       details: '',
       pret: '',
     });
+
+    // this.productForm = 
+    // this.productForm.setValue(resp)
     this.showSuccessMessage = true;
     setTimeout(() => this.showSuccessMessage = false, 3000);
 
   }
     
   onEdit(product, key) {
-    this.productsService.getProduct(product, key).subscribe(resp => {
-      console.log("PUT call successful value returned in body",resp, key);
-    this.productForm = this.formBuilder.group(resp);
-    this.updatedKey = key;
-    console.log(this.updatedKey);
+    localStorage.setItem('editProductModal', JSON.stringify(product));
+    const editModal = this.modalService.open(EditProductModalComponent);
+    editModal.componentInstance._product = product;
+   editModal.result.then(value => { 
+    console.log(value);
+    //salvezi update service
+    this.productsService.updateProduct(value,key).subscribe(resp => {
+      this.products[key] = resp;
+      console.log('raspunsul',resp, key);
     });
+   });
+  
+   // iei valaorea produsului si trimiti la function onupdate
+    // apelezi functia de update din product service cu valoarea produsului care
+    // iti vine pe resultatl modalei
+
+
+    // this.productsService.getProduct(product, key).subscribe(resp => {
+    //   console.log("PUT call successful value returned in body",resp, key);
+    // this.productForm = this.formBuilder.group(resp);
+    // this.updatedKey = key;
+    // console.log(this.updatedKey);
+    // });
   }
 
-  onUpdate(){
-    const newProduct = {
-      cantitate: parseInt(this.productForm.value.cantitate, 10),
-      name: this.productForm.value.name,
-      imageUrl: this.productForm.value.imageUrl,
-      details: this.productForm.value.details,
-      pret: parseInt(this.productForm.value.pret, 10),
-    }
-
-    this.productsService.updateProduct(newProduct,this.updatedKey).subscribe( updateProdResp => {
-      this.products[this.updatedKey] = updateProdResp;
-      //this.keys[this.updatedKey] = updateProdResp;
-      //console.log("Updated product",this.updatedKey,updateProdResp,this.keys,this.products);
-      this.updatedKey = "";
-    });
-  }
+  // onUpdate(){
+   
+  //   this.productsService.updateProduct(value,this.updatedKey).subscribe( updateProdResp => {
+  //     this.products[this.updatedKey] = updateProdResp;
+  //     //this.keys[this.updatedKey] = updateProdResp;
+  //     //console.log("Updated product",this.updatedKey,updateProdResp,this.keys,this.products);
+  //     this.updatedKey = "";
+  //   });
+  // }
 
 }

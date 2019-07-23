@@ -3,7 +3,7 @@
         <div class="col-md-3 col-sm-6" *ngFor="let key of keys">
             <div class="product-grid6">
                 <div class="product-image6">
-                        <img class="pic-1" src={{products[key].imagrUrl}}>
+                        <img class="pic-1" [src]="products[key].imageUrl">
                 </div>
                 <div class="product-content">
                     <h3 class="title">{{products[key].name}}</h3>
@@ -13,7 +13,7 @@
                 </div>
                 <ul class="social">
                     <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                    <li><a (click)="addToCart(key)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a (click)="addToCart(products[key], key)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
         </div>

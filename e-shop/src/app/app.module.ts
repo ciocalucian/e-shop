@@ -16,6 +16,7 @@ import { ModalModule } from 'ngb-modal';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductsService } from './shared/products.service';
+import { EditProductModalComponent } from './admin/edit-product-modal/edit-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductsService } from './shared/products.service';
     AdminComponent,
     DetailsComponent,
     CartComponent,
-    NavBarComponent
+    NavBarComponent,
+    EditProductModalComponent
   ],
   imports: [
     BrowserModule,
@@ -37,5 +39,8 @@ import { ProductsService } from './shared/products.service';
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent],
+  entryComponents: [
+    EditProductModalComponent
+  ]
 })
 export class AppModule { }

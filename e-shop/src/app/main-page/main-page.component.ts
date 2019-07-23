@@ -13,7 +13,7 @@ export class MainPageComponent implements OnInit {
   products = {};
   keys = [];
   cartKeys = [];
-  cartProducts
+  cartProducts;
   
   constructor(private productsService: ProductsService) { }
 
@@ -27,14 +27,13 @@ export class MainPageComponent implements OnInit {
   }
 
   addToCart(product, key){
-    this.productsService.getProduct(product, key).subscribe(resp => {
-      console.log("GET call successful value returned in body",resp, key);
-    console.log(product);
-    this.cartKeys.push(product);
-    console.log(this.cartKeys);
-    localStorage.setItem('produse', JSON.stringify(this.cartKeys));
-    console.log("produs adaugat in cosul de cumparaturi",this.cartKeys)
-    });
+    let cartKeys = {}
+    if (JSON.parse(localStorage.getItem('produse'))) {
+      cartKeys = JSON.parse(localStorage.getItem('produse'));
+    }
+    cartKeys[key] = product;
+    
+    localStorage.setItem('produse', JSON.stringify(cartKeys));
   }
 
 }
