@@ -22,9 +22,13 @@ export class CartComponent implements OnInit {
 
   clearCart(){
     localStorage.clear();
+    this.products = {};
+    this.keys = [];
   }
 
-  deleteProdCart(){
-
+  deleteProdCart(key){
+    delete this.products[key];
+    this.keys = this.keys.filter(existingKey => existingKey !== key);
+    localStorage.setItem('produse', JSON.stringify(this.products));
   }
 }

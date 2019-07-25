@@ -15,9 +15,9 @@
             <td>{{products[key].name}}</td>
             <td>{{products[key].details}}</td>
             <td>{{products[key].pret}}$</td>
-            <td>{{products[key].cantitate}} buc.</td>
+            <td>1buc.</td>
             <td>
-                <button class="btn btn-outline-danger" (click)="deleteProdCart()" >Delete</button>
+                <button class="btn btn-outline-danger" (click)="deleteProdCart(key)" >Delete</button>
             </td>
         </tr>
     </ng-container>

@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AdminComponent } from './admin/admin.component';
-import { DetailsComponent } from './details/details.component';
 import { CartComponent } from './cart/cart.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
@@ -17,16 +16,17 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductsService } from './shared/products.service';
 import { EditProductModalComponent } from './admin/edit-product-modal/edit-product-modal.component';
+import { ProductDetailsComponent } from './main-page/product-details/product-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     AdminComponent,
-    DetailsComponent,
     CartComponent,
     NavBarComponent,
-    EditProductModalComponent
+    EditProductModalComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
