@@ -81,7 +81,7 @@ export class AdminComponent implements OnInit {
   }
     
   onEdit(product, key) {
-    localStorage.setItem('editProductModal', JSON.stringify(product));
+    //localStorage.setItem('editProductModal', JSON.stringify(product));
     const editModal = this.modalService.open(EditProductModalComponent);
     editModal.componentInstance._product = product;
    editModal.result.then(value => { 

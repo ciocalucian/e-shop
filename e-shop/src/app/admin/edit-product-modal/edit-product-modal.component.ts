@@ -25,7 +25,7 @@ export class EditProductModalComponent implements OnInit {
     });
 
     this.product = this._product;
-    //console.log("this.product in edit modal component", this.product);
+    console.log("this.product in edit modal component", this.product);
     this.productForm.setValue(this.product);
   }
 
