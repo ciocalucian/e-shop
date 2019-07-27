@@ -43,7 +43,7 @@ export class MainPageComponent implements OnInit {
     setTimeout(() => this.showSuccessMessage = false, 3000);
   }
   
-  viewProductDetails(product, key){ 
+  viewProductDetails(product){ 
     //this.router.navigate(['/product', key])
     //let url: string = "product/" + key;
     //this.router.navigateByUrl(url);

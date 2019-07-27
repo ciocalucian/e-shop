@@ -54,11 +54,11 @@ export class AdminComponent implements OnInit {
   onSubmit() {
 
     const newProduct = {
-      cantitate: parseInt(this.productForm.value.cantitate, 10),
+      cantitate: this.productForm.value.cantitate,
       name: this.productForm.value.name,
       imageUrl: this.productForm.value.imageUrl,
       details: this.productForm.value.details,
-      pret: parseInt(this.productForm.value.pret, 10),
+      pret: this.productForm.value.pret,
     }
     this.productsService.createProduct(newProduct).subscribe(resp => {
       this.products[resp['name']] = newProduct;
@@ -81,7 +81,7 @@ export class AdminComponent implements OnInit {
   }
     
   onEdit(product, key) {
-    //localStorage.setItem('editProductModal', JSON.stringify(product));
+    localStorage.setItem('editProductModal', JSON.stringify(product));
     const editModal = this.modalService.open(EditProductModalComponent);
     editModal.componentInstance._product = product;
    editModal.result.then(value => { 

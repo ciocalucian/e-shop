@@ -26,7 +26,6 @@
         </div>
       <div>
         <button class="btn btn-primary" (click)="onSubmit()">Add Product</button>
-        <button class="btn btn-primary" (click)="onUpdate()">Update</button>
       </div>
     </form>
     <div class="alert alert-info" *ngIf="showSuccessMessage">
@@ -50,7 +49,7 @@
                   <td>{{products[key].pret}}$</td>
                   <td>{{products[key].cantitate}} buc.</td>
                   <td>
-                      <button class="btn btn-outline-info" (click)="onEdit(product[key],key)">Edit</button>
+                      <button class="btn btn-outline-info" (click)="onEdit(products[key],key)">Edit</button>
                       <button class="btn btn-outline-danger" (click)="onDelete(key)">Delete</button>
                   </td>
               </tr>

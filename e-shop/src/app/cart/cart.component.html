@@ -1,24 +1,29 @@
-<div>
-    <button class="btn btn-danger" (click)="clearCart()">Clear Cart</button>
-</div>
 
+<div></div>
 <table class="table">
     <thead>
         <th>Nume</th>
-        <th>Details</th>
         <th>Pret</th>
-        <th>Cantitate</th>
         <th></th>
     </thead>
     <ng-container *ngFor="let key of keys">
         <tr class="table" >
             <td>{{products[key].name}}</td>
-            <td>{{products[key].details}}</td>
             <td>{{products[key].pret}}$</td>
-            <td>1buc.</td>
+            <td>
+                <a (click)="doubleProduct(products[key],key)">+</a>
+            </td>
             <td>
                 <button class="btn btn-outline-danger" (click)="deleteProdCart(key)" >Delete</button>
             </td>
         </tr>
     </ng-container>
     </table>
+
+    {{productsInCart}}
+    {{totalPrice}}
+
+    <div>
+        <button class="btn btn-danger" (click)="clearCart()">Goleste Cosul</button>
+        <button class="btn btn-success" (click)="order()">Comada</button>
+    </div>
