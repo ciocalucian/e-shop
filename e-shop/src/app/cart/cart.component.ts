@@ -28,7 +28,8 @@ export class CartComponent implements OnInit {
     this.productsInCart = this.keys.length;
     
     for(let key of this.keys){
-      this.totalPrice += parseInt(this.products[key].pret);
+      this.totalPrice = this.totalPrice+(parseInt(this.products[key].pret)* parseInt(this.products[key].cantitate));
+      console.log(this.totalPrice);
     }
   }
 
@@ -50,24 +51,43 @@ export class CartComponent implements OnInit {
     
   }
 
-  doubleProduct(product, key) {
-    console.log(this.products[key].pret,parseInt(this.products[key].pret)+1);
-    let doubleItem = 1;
+  doubleProduct(key) {
+    // console.log(this.products[key].pret,parseInt(this.products[key].pret)+1);
+    // let doubleItem = 1;
 
-    this.products[key + doubleItem] = product;
-    this.keys.push(key+doubleItem);
-    doubleItem += 1;
-    console.log(this.products);
+    // this.products[key + doubleItem] = product;
+    // this.keys.push(key+doubleItem);
+    // doubleItem += 1;
+    // console.log(this.products);
+    // localStorage.setItem('produse', JSON.stringify(this.products));
+    // this.totalPrice += parseInt(this.products[key].pret);
+    // this.productsInCart += 1;  
+    let cantProduct = parseInt(this.products[key].cantitate);
+    //console.log(cantProduct, this.products[key].cantitate);
+    cantProduct += 1;
+    this.products[key].cantitate = cantProduct;
+    this.totalPrice = 0;
+    for(let key of this.keys){
+      this.totalPrice = this.totalPrice+(parseInt(this.products[key].pret)* parseInt(this.products[key].cantitate));
+      console.log(this.totalPrice);
+    }
     localStorage.setItem('produse', JSON.stringify(this.products));
-    this.totalPrice += parseInt(this.products[key].pret);
-    this.productsInCart += 1;  
+
   }
 
-  deleteItemInCart(product, key) {
-    this.totalPrice -= parseInt(this.products[key].pret);
-    this.productsInCart -= 1;
-    console.log(this.totalPrice,this.productsInCart);
+  deleteItemInCart(key) {
+    let cantProduct = parseInt(this.products[key].cantitate);
+    //console.log(cantProduct, this.products[key].cantitate);
+    cantProduct -= 1;
+    this.products[key].cantitate = cantProduct;
+    this.totalPrice = 0;
+    for(let key of this.keys){
+      this.totalPrice = this.totalPrice+(parseInt(this.products[key].pret)* parseInt(this.products[key].cantitate));
+      console.log(this.totalPrice);
+      localStorage.setItem('produse', JSON.stringify(this.products));
+    }
   }
+
 
   delUndef(item: string){
     item = item.slice(9,item.length)

@@ -37,6 +37,7 @@ export class MainPageComponent implements OnInit {
       cartKeys = JSON.parse(localStorage.getItem('produse'));
     }
     cartKeys[key] = product;
+    cartKeys[key].cantitate = 1;
     
     localStorage.setItem('produse', JSON.stringify(cartKeys));
     this.showSuccessMessage = true;

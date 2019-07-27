@@ -4,6 +4,8 @@
     <thead>
         <th>Nume</th>
         <th>Pret</th>
+        <td></td>
+        <th>Cantitate</th>
         <th></th>
     </thead>
     <ng-container *ngFor="let key of keys">
@@ -11,7 +13,11 @@
             <td>{{products[key].name}}</td>
             <td>{{products[key].pret}}$</td>
             <td>
-                <a (click)="doubleProduct(products[key],key)">+</a>
+                <a (click)= "deleteItemInCart(key)">-</a>
+            </td>
+            <td style="text-align: center">{{products[key].cantitate}}</td>
+            <td>
+                <a (click)="doubleProduct(key)">+</a>
             </td>
             <td>
                 <button class="btn btn-outline-danger" (click)="deleteProdCart(key)" >Delete</button>
