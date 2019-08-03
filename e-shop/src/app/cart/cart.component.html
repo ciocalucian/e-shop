@@ -1,35 +1,43 @@
-
-<div></div>
-<table class="table">
-    <thead>
-        <th>Nume</th>
-        <th>Pret</th>
-        <td></td>
-        <th>Cantitate</th>
-        <th></th>
-    </thead>
-    <ng-container *ngFor="let key of keys">
-        <tr class="table" >
-            <td>{{products[key].name}}</td>
-            <td>{{products[key].pret}}$</td>
-            <td>
-                <a (click)= "deleteItemInCart(key)">-</a>
-            </td>
-            <td style="text-align: center">{{products[key].cantitate}}</td>
-            <td>
-                <a (click)="doubleProduct(key)">+</a>
-            </td>
-            <td>
-                <button class="btn btn-outline-danger" (click)="deleteProdCart(key)" >Delete</button>
-            </td>
-        </tr>
-    </ng-container>
-    </table>
-
-    {{productsInCart}}
-    {{totalPrice}}
-
-    <div>
-        <button class="btn btn-danger" (click)="clearCart()">Goleste Cosul</button>
-        <button class="btn btn-success" (click)="order()">Comada</button>
+<div class="container">
+    <div class="container" >
+        <table class="table">
+            <thead>
+                <th>Nume</th>
+                <th>Pret</th>
+                <td></td>
+                <th>Cantitate</th>
+                <th></th>
+                <th>Stock</th>
+                <th></th>
+            </thead>
+            <ng-container *ngFor="let key of keys">
+                <tr class="table" >
+                    <td>{{products[key].name}}</td>
+                    <td>{{products[key].pret}}$</td>
+                    <td>
+                        <a (click)= "deleteItemInCart(key)">-</a>
+                    </td>
+                    <td>{{products[key].cantitate}}</td>
+                    <td>
+                        <a (click)="doubleProduct(key)">+</a>
+                    </td>
+                    <td>{{products[key].stock}}</td>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="deleteProdCart(key)" >Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
     </div>
+    <div class="container">
+            
+        {{productsInCart}}
+        {{totalPrice}}
+
+        <div>
+            <button class="btn btn-danger" (click)="clearCart()">Goleste Cosul</button>
+            <button class="btn btn-success" (click)="order()">Comada</button>
+        </div>
+
+    </div>
+</div>

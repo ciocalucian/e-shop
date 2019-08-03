@@ -22,6 +22,7 @@ export class EditProductModalComponent implements OnInit {
       imageUrl: '',
       details: '',
       pret: '',
+      stock: ''
     });
 
     this.product = this._product;

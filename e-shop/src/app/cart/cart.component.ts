@@ -52,18 +52,7 @@ export class CartComponent implements OnInit {
   }
 
   doubleProduct(key) {
-    // console.log(this.products[key].pret,parseInt(this.products[key].pret)+1);
-    // let doubleItem = 1;
-
-    // this.products[key + doubleItem] = product;
-    // this.keys.push(key+doubleItem);
-    // doubleItem += 1;
-    // console.log(this.products);
-    // localStorage.setItem('produse', JSON.stringify(this.products));
-    // this.totalPrice += parseInt(this.products[key].pret);
-    // this.productsInCart += 1;  
     let cantProduct = parseInt(this.products[key].cantitate);
-    //console.log(cantProduct, this.products[key].cantitate);
     cantProduct += 1;
     this.products[key].cantitate = cantProduct;
     this.totalPrice = 0;
@@ -95,48 +84,21 @@ export class CartComponent implements OnInit {
   }
   
   order() {
-    
-
-    //console.log(this.keys, this.products);
-     for ( let i = 0; i < this.keys.length;i++) {
-        //console.log(this.products[this.keys[i]].name);
-        const productName = this.products[this.keys[i]].name;
-        // this.orderedProducts[productName] = '+';
-        this.orderedProducts.push(productName);  
-     }
-     //console.log(this.orderedProducts);
-     for ( let i = 0; i < this.orderedProducts.length; i++ ){
-      this.orderItems[this.products[this.keys[i]].name] = this.orderItems[this.products[this.keys[i]].name] +'1';
-     }
-     //console.log(this.orderItems);
-     
-     for (let x in this.orderItems) {
-       this.orderItems[x] = this.delUndef(this.orderItems[x]);
-       this.orderItems[x] = this.orderItems[x].length;
-     }
-     console.log(this.orderItems);
-     for (let k = 0; k < this.keys.length; k++) {
-       for ( let z = k+1; z < this.keys.length;z++){
-         if(this.products[this.keys[k]] == this.products[this.keys[z]]) {
-          this.keys.slice(k+1,k+2);
-          k++;
-        } else {
-          this.lastProducts[this.keys[k]] = '1';
-        }
-
-       }
-     }
-     console.log(this.lastProducts);
+    for( let key of this.keys){
+      this.products[key].stock = this.products[key].stock - this.products[key].cantitate;
+      this.products[key].cantitate = 1;
+      console.log(this.products[key]);
+      
+      this.productsService.updateProduct(this.products[key],key).subscribe(resp => {
+         this.products[key] = resp;
+         console.log('raspunsul',resp, key);
+       });
+      
+    }
+    localStorage.clear();
+    this.keys = [];
+    this.products = {};
+    this.productsInCart = 0;
+    this.totalPrice = 0;
   }
-lastOrder( ){
-  // put to bd /produse/key/cantitate: cantitate
-  // post /comenzi/key/{
-  //                    data:            
-  //                    data:            
-  //                    data:            
-  //                    data:            
-  //                    data:            
-  //}
-}
-
 }

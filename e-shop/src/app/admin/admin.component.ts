@@ -35,7 +35,8 @@ export class AdminComponent implements OnInit {
       details: '',
       imageUrl: '',
       pret: '',
-      name: ''
+      name: '',
+      stock: ''
     });
  }
 
@@ -59,6 +60,7 @@ export class AdminComponent implements OnInit {
       imageUrl: this.productForm.value.imageUrl,
       details: this.productForm.value.details,
       pret: this.productForm.value.pret,
+      stock: this.productForm.value.stock,
     }
     this.productsService.createProduct(newProduct).subscribe(resp => {
       this.products[resp['name']] = newProduct;
@@ -71,6 +73,7 @@ export class AdminComponent implements OnInit {
       imageUrl: '',
       details: '',
       pret: '',
+      stock: '',
     });
 
     // this.productForm = 
