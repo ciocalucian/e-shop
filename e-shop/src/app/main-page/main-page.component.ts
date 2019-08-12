@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../shared/products.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @Component({
   selector: 'app-main-page',
