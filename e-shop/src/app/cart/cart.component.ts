@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../shared/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   orderItems = {};
   lastProducts = {};
 
-  constructor(public productsService: ProductsService) { }
+  constructor(public productsService: ProductsService, private router: Router) { }
 
   ngOnInit() {
     
@@ -72,7 +73,7 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0;
     for(let key of this.keys){
       this.totalPrice = this.totalPrice+(parseInt(this.products[key].pret)* parseInt(this.products[key].cantitate));
-      console.log(this.totalPrice);
+      //console.log(this.totalPrice);
       localStorage.setItem('produse', JSON.stringify(this.products));
     }
   }
@@ -87,11 +88,11 @@ export class CartComponent implements OnInit {
     for( let key of this.keys){
       this.products[key].stock = this.products[key].stock - this.products[key].cantitate;
       this.products[key].cantitate = 1;
-      console.log(this.products[key]);
+      //console.log(this.products[key]);
       
       this.productsService.updateProduct(this.products[key],key).subscribe(resp => {
          this.products[key] = resp;
-         console.log('raspunsul',resp, key);
+         //console.log('raspunsul',resp, key);
        });
       
     }

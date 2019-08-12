@@ -43,15 +43,22 @@ export class MainPageComponent implements OnInit {
     setTimeout(() => this.showSuccessMessage = false, 3000);
   }
   
-  viewProductDetails(product){ 
-    //this.router.navigate(['/product', key])
-    //let url: string = "product/" + key;
-    //this.router.navigateByUrl(url);
-    const editModal = this.modalService.open(ProductDetailsComponent);
-    editModal.componentInstance.detailedProduct = product;
-    editModal.result.then(value => { 
-      console.log(value,product);
-    });
+  viewProductDetails(product, key){ 
+    let detailedProduct = {};
+    
+    detailedProduct[key] = product;
+
+    localStorage.setItem('detail', JSON.stringify(detailedProduct));
+    
+    this.router.navigate(['/product', key])
+    let url: string = "product/" + key;
+    this.router.navigateByUrl(url);
+    //localStorage.setItem('detail',key);
+    // const editModal = this.modalService.open(ProductDetailsComponent);
+    // editModal.componentInstance.detailedProduct = product;
+    // editModal.result.then(value => { 
+    //   console.log(value,product);
+    // });
   }
 
   

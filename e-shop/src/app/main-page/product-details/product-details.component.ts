@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProductsService } from 'src/app/shared/products.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,14 +9,29 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input() detailedProduct: any;
 
-  constructor() { }
-  product = {};
+  products = {};
+  keys = [];
+  key = '';
+
+  constructor(private productsService: ProductsService,private router: Router) { }
 
   ngOnInit() {
-    this.product = this.detailedProduct;
-    console.log(this.product);
+   const detailProd =  JSON.parse(localStorage.getItem('detail'));
+   this.products = detailProd;
+   this.keys = Object.keys(detailProd);
+   this.key = this.keys[0];
   }
 
+  addToCart(product, key){
+    let cartKeys = {}
+    if (JSON.parse(localStorage.getItem('produse'))) {
+      cartKeys = JSON.parse(localStorage.getItem('produse'));
+    }
+    cartKeys[key] = product;
+    
+    localStorage.setItem('produse', JSON.stringify(cartKeys));
+    this.router.navigateByUrl("/cart");
+
+  }
 }

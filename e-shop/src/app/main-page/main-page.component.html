@@ -11,13 +11,13 @@
                 </div>
                 <div class="product-content">
                     <h3 class="title">{{products[key].name}}</h3>
-                    <h5>{{products[key].stock}}</h5>
+                    <h5>Stock:{{products[key].stock}}</h5>
                     <div class="price">
                         ${{products[key].pret}}
                     </div>
                 </div>
                 <ul class="social">
-                    <li><a (click)="viewProductDetails(products[key])" data-tip="View Details"><i class="fa fa-search"></i></a></li>
+                    <li><a (click)="viewProductDetails(products[key],key)" data-tip="View Details"><i class="fa fa-search"></i></a></li>
                     <li><a (click)="addToCart(products[key], key)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
